@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 
 // Ads schema declaration
 const adsSchema = mongoose.Schema({
-    name: { type: String, index: true },
+    name: { type: String, required: true, index: true },
     sale: { type: Boolean, index: true },
-    price: { type: Number, index: true },
+    price: { type: Number, required: true, index: true },
     photo: { type: String },
     tags: [{ type: String }]
 });

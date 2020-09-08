@@ -1,14 +1,30 @@
 var express = require('express');
 var router = express.Router();
+const multer = require('multer');
 const Ads = require('../../models/Ads');
+
+/* To save the images on local storage */
+// const upload = multer({ dest: 'uploads/'});
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        const myFilename = `ads_${file.fieldname}_${Date.now()}_${file.originalname}`;
+        cb(null, myFilename);
+    }
+});
+const upload = multer({ storage: storage });
 
 /* GET /api/ads. To get the ads list using filters or extras if necessary. */
 router.get('/', async function (req, res, next) {
     try {
         // http://localhost:3000/api/ads?name=Samsung
         const name = req.query.name;
-        // http://localhost:3000/api/ads?price=360
-        const price = req.query.price;
+        // http://localhost:3000/api/ads?priceStart=360
+        const priceMin = req.query.price;
+        // http://localhost:3000/api/ads?priceMax=360
+        const priceMax = req.query.price;
         // http://localhost:3000/api/ads?sale=true
         const sale = req.query.sale
 
@@ -26,11 +42,16 @@ router.get('/', async function (req, res, next) {
         const filter = {};
 
         if (name) {
-            filter.name = name;
+            console.log(new RegExp('^' + name, 'i'));
+            filter.name = new RegExp('^' + name, 'i');
         }
 
-        if (price) {
-            filter.price = price;
+        if (priceMin) {
+            filter.price = { $gte: priceMin }
+        }
+
+        if (priceMax) {
+            filter.price = { $lte: priceMax }
         }
 
         if (sale) {
@@ -110,9 +131,9 @@ router.delete('/:_id', async (req, res, next) => {
     }
 });
 
-// router.post('/upload', upload.single('image'), (req, res, next) => {
-//     console.log(req.file);
-//     res.send('ok');
-// });
+router.post('/upload', upload.single('image'), (req, res, next) => {
+    console.log(req.file);
+    res.send('ok');
+});
 
 module.exports = router;
