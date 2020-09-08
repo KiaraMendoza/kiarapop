@@ -16,7 +16,9 @@ Copy .env.example to .env and review the settings to adjust them to yours.
 cp .env.example .env
 ```
 
-### The first time you may also want to start the database with some default data:
+### The first time you use this, you may also want to start the database with some default data:
+
+For doing that, just execute the following command:
 
 ```sh
 npm run init-db
@@ -24,7 +26,7 @@ npm run init-db
 
 **Warning! this script delete database contents before the load.**
 
-Use in production only in the first deployment.
+When used in production, use only in the first deployment.
 
 ## Usage
 
@@ -68,7 +70,7 @@ Example filters:
 * http://localhost:3000/api/ads?sale=true
 * http://localhost:3000/api/ads?skip=20&limit=10
 * http://localhost:3000/api/ads?sort=name
-* http://localhost:3000/api/ads?fields=name%20-_id (get only age, discarting the id field)
+* http://localhost:3000/api/ads?fields=name%20-_id (get only names, discarting the id field)
 
 ### To get only one ad by id
 
