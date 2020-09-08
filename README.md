@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Nodepop 👋</h1>
+<h1 align="center">Welcome to Kiarapop 👋</h1>
 
 This is a project made for the KeepCoding's Web Development Bootcamp. I hope you like it and send feedback to improve!
 
@@ -42,9 +42,10 @@ npm run dev
 
 GET /api/ads
 
+```json
 [
   {
-    _id": "5f54ff0359704a3fd0186857",
+    "_id": "5f54ff0359704a3fd0186857",
     "name": "Samsung Galaxy S9",
     "price": 360,
     "sale": true,
@@ -58,6 +59,7 @@ GET /api/ads
     "tags": ["mobile","recent"]
   }
 ]
+```
 
 Example filters:
 
@@ -72,43 +74,49 @@ Example filters:
 
 GET /api/ads/_id
 
+```json
 {
   "result": {
-    _id": "5f54ff0359704a3fd0186857",
+    "_id": "5f54ff0359704a3fd0186857",
     "name": "Samsung Galaxy S9",
     "price": 360,
     "sale": true,
     "tags": ["mobile","recent"]
   },
 }
+```
 
 ### To create one ad
 
 POST /api/ads body: { name: 'Ad name', price: 999, sale: true, tags: ["example"] },
 
+```json
 {
   "result":  { 
-    name: 'Ad name',
-    price: 999, 
-    sale: true, 
-    tags: ["example"] 
+    "name": "Ad name",
+    "price": 999, 
+    "sale": true, 
+    "tags": ["example"] 
   },
 }
+```
 
 ### Update one ad by id
 
 PUT /api/agentes/<_id> body: { name: 'Ad new name', price: 444 }
 
+```json
 {
   "result": { 
-    name: 'Ad new name',
-    price: 444, 
-    sale: true, 
-    tags: ["example"] 
+    "name": "Ad new name",
+    "price": 444, 
+    "sale": true, 
+    "tags": ["example"] 
   },
 }
+```
 
-### Delete an ad bu id
+### Delete one ad by id
 
 DELETE /api/agentes/<_id>
 
