@@ -1,0 +1,22 @@
+<% include partials/head.ejs %>
+
+<div class="container">
+    <h1 class="text-center"><%= title %></h1>
+    <p class="text-center">You are now seeing the ads filtered!</p>
+    <div class="row row-cols-3">
+        <% ads.forEach(ad => { %>
+        <div class="col">
+            <div class="card">
+                <img src="https://placedog.net/560" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text d-flex justify-content-between"><%= ad.name %>. <b class="card-title"><%= ad.price %>.</b></p>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+</body>
+
+</html>
