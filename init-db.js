@@ -40,8 +40,11 @@ async function initAds() {
     // then, start creating new ones
     console.log('Creating new ads, please wait...');
     const createdAds = await Ads.insertMany([
-        { name: 'Samsung Galaxy S9', price: 360, sale: true, tags: ["mobile", "recent"] },
-        { name: 'Xiaomi Redmi Note 8', price: 190, sale: true, tags: ["mobile", "recent"] },
+        { name: 'Samsung Galaxy S9', price: 360, sale: true, tags: ["mobile", "lifestyle"] },
+        { name: 'Samsung Galaxy S9', price: 260, sale: false, tags: ["mobile", "lifestyle"] },
+        { name: 'Macbook pro 2020', price: 1300, sale: false, tags: ["work", "lifestyle"] },
+        { name: 'Xiaomi Redmi Note 8', price: 190, sale: true, tags: ["mobile", "lifestyle"] },
+        { name: 'Tesla model X', price: 60000, sale: true, tags: ["motor", "work"] },
     ]);
     console.log(`Created ${createdAds.length} ads.`);
 }

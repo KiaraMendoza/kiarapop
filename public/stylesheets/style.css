@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+.main-page .col {
+  padding-bottom: 2rem;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding-bottom: .3rem;
+}
+
+.card-price {
+  font-weight: bold;
+  font-size: .9rem;
+}

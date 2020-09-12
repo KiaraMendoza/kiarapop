@@ -1,0 +1,32 @@
+<% include partials/head.ejs %>
+<h1><%= title %></h1>
+<p>Here you have a list of possible filters:</p>
+
+<p>Example of filter url: <i>http://localhost:3000/api/ads?name=adName</i></p>
+<p>Where name is the filter type name and adName is the value of the filter</p>
+
+<b>Filter by name:</b>
+<p>name=adName</p>
+<b>Filter by price:</b>
+<p>price=360. For exact price.</p>
+<p>price=360-. For minimun.</p>
+<p>price=360-. For maximun.</p>
+<p>price=360-400. For price range.</p>
+<b>Filter by sale or buy:</b>
+<p>sale=true. For saling</p>
+<p>sale=false. For buying.</p>
+<b>Filters to skip a number of ads and/or change the maximun ads you get:</b>
+<p>skip=20&limit=10</p>
+<b>Sort by name:</b>
+<p>sort=name</p>
+<b>Get only ads' name, exclude id:</b>
+<p>fields=name%20-_id</p>
+<b>Filter by tags:</b>
+<p>tags=lifestyle work</p>
+
+<b>Example of mixed filter:</b>
+<a href="/api/ads?tags=mobile&sale=false&name=samsung&price=50-&skip=0&limit=2&sort=price">http://localhost:3000/api/ads?tags=mobile&sale=false&name=samsung&price=50-&skip=0&limit=2&sort=price</a>
+
+</body>
+
+</html>
