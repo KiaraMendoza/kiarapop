@@ -1,6 +1,10 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.container {
+  padding: 50px;
+  min-height: 83.5vh;
 }
 
 a {
@@ -20,4 +24,27 @@ a {
 .card-price {
   font-weight: bold;
   font-size: .9rem;
+}
+
+.list-group-item {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.list-group-item+.list-group-item {
+  border-top-width: 1px;
+}
+
+footer {
+  background-color: #0d0d0d;
+  padding: 2rem 0;
+}
+
+footer p {
+  color: #fff;
+}
+
+footer a, footer a:hover {
+  color: #fff;
+  text-decoration: underline;
 }
