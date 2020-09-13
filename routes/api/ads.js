@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const multer = require('multer');
 const Ads = require('../../models/Ads');
+const path = require('path');
+const fs = require('fs');
 
 /* To save the images on local storage */
 // const upload = multer({ dest: 'uploads/'});
@@ -10,14 +12,14 @@ const storage = multer.diskStorage({
         cb(null, './public/images/');
     },
     filename: function (req, file, cb) { // The new filename based on the file's name and date now.
-        const newFilename = `ads_${Date.now()}_${file.originalname}`;
+        const newFilename = `${Date.now()}_${file.originalname}`;
         cb(null, newFilename);
     }
 });
 const upload = multer({ storage: storage });
 
 /* GET /api/ads. To get the ads list using filters or extras if necessary. */
-router.get('/', async function (req, res, next) {
+router.get('/ads', async function (req, res, next) {
     try {
         // http://localhost:3000/api/ads?name=Samsung
         const name = req.query.name;
@@ -79,7 +81,6 @@ router.get('/', async function (req, res, next) {
 
         const ads = await Ads.list(filter, limit, skip, sort, fields);
         // res.json(ads);
-        console.log(ads[0].name);
 
         res.render('ads.ejs', { title: 'KiaraPop', ads: ads });
     } catch (err) {
@@ -88,7 +89,7 @@ router.get('/', async function (req, res, next) {
 });
 
 /* GET /api/ads/<_id>. To get single ads by id */
-router.get('/:_id', async (req, res, next) => {
+router.get('/ads/:_id', async (req, res, next) => {
     try {
 
         const _id = req.params._id;
@@ -103,7 +104,7 @@ router.get('/:_id', async (req, res, next) => {
 });
 
 /* POST /api/ads. To post new ads */
-router.post('/', async (req, res, next) => {
+router.post('/ads', async (req, res, next) => {
     try {
         // get the data from the request body
         const adData = req.body;
@@ -135,7 +136,7 @@ router.post('/', async (req, res, next) => {
 });
 
 /* PUT /api/ads/:_id. To update an ad by id */
-router.put('/:_id', async (req, res, next) => {
+router.put('/ads/:_id', async (req, res, next) => {
     try {
         const _id = req.params._id;
         const newAdData = req.body;
@@ -153,13 +154,13 @@ router.put('/:_id', async (req, res, next) => {
 });
 
 /* DELETE /api/ads/:_id. To delete an ad by id */
-router.delete('/:_id', async (req, res, next) => {
+router.delete('/ads/:_id', async (req, res, next) => {
     try {
         const _id = req.params._id;
 
-        await Ads.deleteOne({ _id: _id });
+        const deletedAd = await Ads.findOneAndDelete({ _id: _id });
 
-        res.json();
+        res.json({ deletedAd: deletedAd });
     } catch (err) {
         next(err);
     }
@@ -171,13 +172,32 @@ router.post('/upload', upload.single('image'), (req, res, next) => {
     res.send(req.file + '<------- file uploaded');
 });
 
-// DELETE /api/upload/delete. To delete an image by it's filename.
-router.delete('/upload/:name', async (req, res, next) => {
-    try {
-        const name = req.params.name;
-    } catch (err) {
-        next(err);
-    }
+// GET /api/images. To get all images
+router.get('/images', (req, res, next) => {
+    const directoryPath = path.join(__dirname, '../../public/images');
+    let getImages = fs.readdirSync(directoryPath, function (err, files) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        }
+        //listing all files using forEach
+        files.forEach(function (file) {
+            // Do whatever you want to do with the file
+            console.log(file);
+        });
+        return files;
+    });
+
+    res.send(getImages);
 })
+
+// DELETE /api/upload/delete. To delete an image by it's filename.
+// router.delete('/upload/:name', async (req, res, next) => {
+//     try {
+//         const name = req.params.name;
+//     } catch (err) {
+//         next(err);
+//     }
+// })
 
 module.exports = router;

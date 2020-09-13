@@ -118,11 +118,38 @@ PUT /api/agentes/<_id> body: { name: 'Ad new name', price: 444 }
 }
 ```
 
+**Important! When updating an Ad to set an image to it, use the following syntax: "../images/ImageNAME"**
+**To check your uploaded image name, use the GET /api/images method. (Because the api ads some numbers to prevent duplicated names).**
+
 ### Delete one ad by id
 
 DELETE /api/agentes/<_id>
 
-Returns: HTTPCode 200 its to say, a successfully response from the server.
+Returns: HTTPCode 200 its to say, a successfully response from the server. And the deleted Ad.
+
+```json
+{
+  "result": { 
+    "name": "Ad new name",
+    "price": 444, 
+    "sale": true, 
+    "tags": ["example"] 
+  },
+}
+```
+
+### Get all images
+Needed for updating ads and add them it's images.
+
+GET /api/images
+
+```json
+[
+    "1599842148234_checo.jpg",
+    "1600011872410_macbookpro.jpg",
+    "1600011932250_xiaomi.jpg"
+]
+```
 
 ## Author
 

@@ -17,7 +17,7 @@
         <% ads.forEach(ad => { %>
         <div class="col">
             <div class="card">
-                <img src="<%= ad.image ? ad.image : 'https://placedog.net/560' %>" class="card-img-top" alt="<%= ad.name %>">
+                <img src=<%= ad.image || "https://placedog.net/560" %> class="card-img-top" alt="<%= ad.name %>">
                 <div class="card-body">
                     <p class="card-text text-center card-title"><%= ad.name %>.</p>
                     <p class="card-text d-flex justify-content-between card-price font-weight-bold"><%= ad.price %> €. <i><%= ad.sale === true ? 'For sale' : 'To buy' %>.</i></p>

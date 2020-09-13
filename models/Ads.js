@@ -7,7 +7,7 @@ const adsSchema = mongoose.Schema({
     name: { type: String, required: true, index: true },
     sale: { type: Boolean, index: true },
     price: { type: Number, required: true, index: true },
-    photo: { type: String },
+    image: { type: String },
     tags: [{ type: String }]
 });
 
