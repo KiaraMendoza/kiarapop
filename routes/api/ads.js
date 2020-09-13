@@ -80,9 +80,9 @@ router.get('/ads', async function (req, res, next) {
     
 
         const ads = await Ads.list(filter, limit, skip, sort, fields);
-        // res.json(ads);
+        res.json(ads);
 
-        res.render('ads.ejs', { title: 'KiaraPop', ads: ads });
+        // res.render('ads', { title: 'KiaraPop', ads: ads });
     } catch (err) {
         next(err);
     }
