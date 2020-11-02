@@ -12,13 +12,19 @@ const adsSchema = mongoose.Schema({
 });
 
 // method to list the ads using filters and extras
-adsSchema.statics.list = function (filter, limit, skip, sort, fields) {
+adsSchema.statics.list = async function (filter, limit, skip, sort, fields, cb) {
     const query = Ads.find(filter);
     query.limit(limit);
     query.skip(skip);
     query.sort(sort);
     query.select(fields);
-    return query.exec();
+
+    const result = {};
+    
+    result.ads = await query.exec();
+
+    if (cb) return cb(null, result); // return with cb if given
+    return result.ads; 
 }
 
 // create the model

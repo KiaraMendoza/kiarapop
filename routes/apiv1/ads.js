@@ -79,10 +79,15 @@ router.get('/ads', async function (req, res, next) {
          }
     
 
-        const ads = await Ads.list(filter, limit, skip, sort, fields);
-        // res.json(ads);
+        // const ads = await Ads.list(filter, limit, skip, sort, fields);
+        // res.json(ads)
 
-        res.render('ads.ejs', { title: 'KiaraPop', ads: ads });
+        Ads.list(filter, limit, skip, sort, fields, function (err, ads) {
+            if (err) return next(err);
+            res.json({ ok: true, result: ads });
+        });
+
+        // res.render('ads.ejs', { title: 'KiaraPop', ads: ads });
     } catch (err) {
         next(err);
     }

@@ -42,7 +42,7 @@ npm run dev
 
 ## API Methods
 
-GET /api/ads
+GET /apiv2/ads
 
 ```json
 [
@@ -65,16 +65,16 @@ GET /api/ads
 
 Example filters:
 
-* http://localhost:3000/api/ads?name=adName
-* http://localhost:3000/api/ads?price=360
-* http://localhost:3000/api/ads?sale=true
-* http://localhost:3000/api/ads?skip=20&limit=10
-* http://localhost:3000/api/ads?sort=name
-* http://localhost:3000/api/ads?fields=name%20-_id (get only names, discarting the id field)
+* http://localhost:3000/apiv2/ads?name=adName
+* http://localhost:3000/apiv2/ads?price=360
+* http://localhost:3000/apiv2/ads?sale=true
+* http://localhost:3000/apiv2/ads?skip=20&limit=10
+* http://localhost:3000/apiv2/ads?sort=name
+* http://localhost:3000/apiv2/ads?fields=name%20-_id (get only names, discarting the id field)
 
 ### To get only one ad by id
 
-GET /api/ads/_id
+GET /apiv2/ads/_id
 
 ```json
 {
@@ -90,7 +90,7 @@ GET /api/ads/_id
 
 ### To create one ad
 
-POST /api/ads body: { name: 'Ad name', price: 999, sale: true, tags: ["example"] },
+POST /apiv2/ads body: { name: 'Ad name', price: 999, sale: true, tags: ["example"] },
 
 ```json
 {
@@ -105,7 +105,7 @@ POST /api/ads body: { name: 'Ad name', price: 999, sale: true, tags: ["example"]
 
 ### Update one ad by id
 
-PUT /api/agentes/<_id> body: { name: 'Ad new name', price: 444 }
+PUT /apiv2/agentes/<_id> body: { name: 'Ad new name', price: 444 }
 
 ```json
 {
@@ -119,11 +119,11 @@ PUT /api/agentes/<_id> body: { name: 'Ad new name', price: 444 }
 ```
 
 **Important! When updating an Ad to set an image to it, use the following syntax: "../images/ImageNAME"**
-**To check your uploaded image name, use the GET /api/images method. (Because the api ads some numbers to prevent duplicated names).**
+**To check your uploaded image name, use the GET /apiv2/images method. (Because the api ads some numbers to prevent duplicated names).**
 
 ### Delete one ad by id
 
-DELETE /api/agentes/<_id>
+DELETE /apiv2/agentes/<_id>
 
 Returns: HTTPCode 200 its to say, a successfully response from the server. And the deleted Ad.
 
@@ -141,7 +141,7 @@ Returns: HTTPCode 200 its to say, a successfully response from the server. And t
 ### Get all images
 Needed for updating ads and add them it's images.
 
-GET /api/images
+GET /apiv2/images
 
 ```json
 [
