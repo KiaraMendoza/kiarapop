@@ -5,6 +5,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const loginController = require('./routes/loginController');
+
+// const sessionConfigure = require('./lib/sessionConfigure');
+// const loginController = require('./routes/loginController');
+// const privadoController = require('./routes/privadoController');
+const jwtAuth = require('./lib/jwtAuth');
 
 const app = express();
 
@@ -25,12 +31,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Setup i18n, always before cookieParser!
+const i18n = require('./lib/i18nConfigure');
+app.use(i18n.init);
+
 // web routes
 app.use('/', require('./routes/index'));
 app.use('/ads', require('./routes/ads'));
 
 // api routes
-app.use('/apiv1', require('./routes/apiv1/ads'));
+app.post(`/api${process.env.API_VERSION}/auth`, loginController.auth);
+app.use(`/api${process.env.API_VERSION}/`, jwtAuth(), require(`./routes/api${process.env.API_VERSION}/ads`));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

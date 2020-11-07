@@ -5,6 +5,7 @@ require('dotenv').config();
 const readline = require('readline');
 const connection = require('./lib/connectMongoose');
 const Ads = require('./models/Ads');
+const User = require('./models/User');
 
 connection.once('open', async () => {
     try {
@@ -19,7 +20,7 @@ connection.once('open', async () => {
 
         // start initializing collections
         await initAds();
-        // await initUsuarios();
+        await initUsers();
         // ...
 
         // close connection
@@ -37,7 +38,7 @@ async function initAds() {
     console.log('Deleting previous ads...');
     await Ads.deleteMany();
 
-    // then, start creating new ones
+    // Create new ads
     console.log('Creating new ads, please wait...');
     const createdAds = await Ads.insertMany([
         { name: 'Samsung Galaxy S9', price: 360, sale: true, tags: ["mobile", "lifestyle"] },
@@ -47,6 +48,20 @@ async function initAds() {
         { name: 'Tesla model X', price: 60000, sale: true, tags: ["motor", "work"] },
     ]);
     console.log(`Created ${createdAds.length} ads.`);
+}
+
+async function initUsers() {
+    // Delete existing users
+    console.log('Deleting previous users...');
+    await User.deleteMany();
+
+    // Create new users
+    console.log('Creating new users, please wait...');
+    const result = await User.insertMany([
+        { username: "Tester", email: 'user@example.com', password: await User.hashPassword('1234'), rol: "user" },
+        { username: "Kiara", email: 'kiaraymg@gmail.com', password: await User.hashPassword('1234'), rol: "admin" },
+    ]);
+    console.log(`Created ${result.length} users.`);
 }
 
 // The function to ask the user to restart or not the data on the database
