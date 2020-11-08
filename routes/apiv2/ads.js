@@ -4,6 +4,7 @@ const multer = require('multer');
 const Ads = require('../../models/Ads');
 const path = require('path');
 const fs = require('fs');
+const jimp = require('jimp');
 
 /* To save the images on local storage */
 // const upload = multer({ dest: 'uploads/'});
@@ -18,8 +19,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-/* GET /api/ads. To get the ads list using filters or extras if necessary. */
-router.get('/ads', async function (req, res, next) {
+/* GET /api/ads/. To get the ads list using filters or extras if necessary. */
+router.get('/', async function (req, res, next) {
     try {
         // http://localhost:3000/api/ads?name=Samsung
         const name = req.query.name;
@@ -94,7 +95,7 @@ router.get('/ads', async function (req, res, next) {
 });
 
 /* GET /api/ads/<_id>. To get single ads by id */
-router.get('/ads/:_id', async (req, res, next) => {
+router.get('/:_id', async (req, res, next) => {
     try {
 
         const _id = req.params._id;
@@ -109,29 +110,33 @@ router.get('/ads/:_id', async (req, res, next) => {
 });
 
 /* POST /api/ads. To post new ads */
-router.post('/ads', async (req, res, next) => {
+router.post('/', upload.any(), async (req, res, next) => {
     try {
         // get the data from the request body
         const adData = req.body;
+        const adObject = { ...adData, image: req.files[0].filename};
 
         // check if given tag is available
         if (Array.isArray(adData.tags) && adData.tags.length > 0) {
-            adData.tags.forEach(tag => {
-                if (tag !== "work" && tag !== "lifestyle" && tag !== "motor" && tag !== "mobile") {
+            adData.tags.map(tag => {
+                if (tag !== "work" || tag !== "lifestyle" || tag !== "motor" || tag !== "mobile") {
                     // If the given tag isn't of the previous, we send an error.
                     throw(new Error('One of the Ad\'s tag isn\'t valid'));
                 }
             })
-        } else if (adData.tags !== "work" && adData.tags !== "lifestyle" && adData.tags !== "motor" && adData.tags !== "mobile") {
-            throw(new Error('The Ad\'s tag isn\'t valid'));
         }
         // create the ad with that data
-        const ad = new Ads(adData);
+        const ad = new Ads(adObject);
+        console.log(ad);
+
+        // create a thumbnail of the image on a queue
+        const imagePath = req.files[0].destination + req.files[0].filename;
+        const imageFileName = req.files[0].filename;
+        ad.enqueueThumbnailsCreation(imagePath, imageFileName, "./public/thumbnails/", ad._id);
 
         // finally save it on database
         const adSaved = await ad.save();
 
-        console.log(adData)
         // respond with the created ad
         res.json({ result: adSaved });
 
@@ -141,7 +146,7 @@ router.post('/ads', async (req, res, next) => {
 });
 
 /* PUT /api/ads/:_id. To update an ad by id */
-router.put('/ads/:_id', async (req, res, next) => {
+router.put('/:_id', async (req, res, next) => {
     try {
         const _id = req.params._id;
         const newAdData = req.body;
@@ -159,7 +164,7 @@ router.put('/ads/:_id', async (req, res, next) => {
 });
 
 /* DELETE /api/ads/:_id. To delete an ad by id */
-router.delete('/ads/:_id', async (req, res, next) => {
+router.delete('/:_id', async (req, res, next) => {
     try {
         const _id = req.params._id;
 

@@ -43,8 +43,8 @@ async function initAds() {
     const createdAds = await Ads.insertMany([
         { name: 'Samsung Galaxy S9', price: 360, sale: true, tags: ["mobile", "lifestyle"] },
         { name: 'RedmiRed', price: 260, sale: false, tags: ["mobile", "lifestyle"] },
-        { name: 'Macbook pro 2020', price: 1300, sale: false, tags: ["work", "lifestyle"], image: "/images/1600011872410_macbookpro.jpg" },
-        { name: 'Xiaomi Redmi Note 8', price: 190, sale: true, tags: ["mobile", "lifestyle"], image: "/images/1600011932250_xiaomi.jpg"  },
+        { name: 'Macbook pro 2020', price: 1300, sale: false, tags: ["work", "lifestyle"], image: "1600011872410_macbookpro.jpg" },
+        { name: 'Xiaomi Redmi Note 8', price: 190, sale: true, tags: ["mobile", "lifestyle"], image: "1600011932250_xiaomi.jpg"  },
         { name: 'Tesla model X', price: 60000, sale: true, tags: ["motor", "work"] },
     ]);
     console.log(`Created ${createdAds.length} ads.`);

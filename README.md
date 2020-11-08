@@ -5,7 +5,7 @@ This is a project made for the KeepCoding's Web Development Bootcamp. I hope you
 ## Install
 
 ```sh
-npm start
+npm install
 ```
 
 ## Configure environment variables
@@ -23,6 +23,8 @@ For doing that, just execute the following command:
 ```sh
 npm run init-db
 ```
+
+** For some reason, this command isnt working properly, so please, just make a 'Ctrl + C' right after you see the message 'Created 2 users' on the console.
 
 **Warning! this script delete database contents before the load.**
 
@@ -98,9 +100,13 @@ POST /apiv2/ads body: { name: 'Ad name', price: 999, sale: true, tags: ["example
     "name": "Ad name",
     "price": 999, 
     "sale": true, 
-    "tags": ["example"] 
+    "tags": ["example"],
+    "image": "10101010010_imageName.jpg"
   },
 }
+
+The thumbnail will automatically be generating right after you post the new ad, it will just take some little time to appear on the ads' page.
+
 ```
 
 ### Update one ad by id
@@ -117,9 +123,6 @@ PUT /apiv2/agentes/<_id> body: { name: 'Ad new name', price: 444 }
   },
 }
 ```
-
-**Important! When updating an Ad to set an image to it, use the following syntax: "../images/ImageNAME"**
-**To check your uploaded image name, use the GET /apiv2/images method. (Because the api ads some numbers to prevent duplicated names).**
 
 ### Delete one ad by id
 

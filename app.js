@@ -4,6 +4,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const logger = require('morgan');
 const loginController = require('./routes/loginController');
 const jwtAuth = require('./lib/jwtAuth');
@@ -22,8 +23,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,7 +39,7 @@ app.use('/ads', require('./routes/ads'));
 
 // api routes
 app.post(`/api${process.env.API_VERSION}/auth`, loginController.auth);
-app.use(`/api${process.env.API_VERSION}/`, jwtAuth(), require(`./routes/api${process.env.API_VERSION}/ads`));
+app.use(`/api${process.env.API_VERSION}/ads`, jwtAuth(), require(`./routes/api${process.env.API_VERSION}/ads`));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,7 +48,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  if (req.originalUrl.startsWith('/api/')) { // API request
+  if (req.originalUrl.startsWith(`/api${process.env.API_VERSION}/`)) { // API request
     res.json({ error: err.message });
     return;
   }
