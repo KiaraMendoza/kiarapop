@@ -6,7 +6,12 @@
 	"basics": {
 		"or": "or",
 		"for": "for",
-		"by": "by"
+		"by": "by",
+		"show_all": "Show all"
+	},
+	"home": {
+		"title": "Welcome to",
+		"subtitle": "Go check the ads!"
 	},
 	"for_sale": "For sale",
 	"to_buy": "To buy",

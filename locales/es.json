@@ -6,8 +6,14 @@
 	"basics": {
 		"or": "o",
 		"for": "para",
-		"by": "por"
+		"by": "por",
+		"show_all": "Mostrar todo"
 	},
+	"home": {
+		"title": "Bienvenido a",
+		"subtitle": "¡Venga, echa un vistazo a la página de anuncios!"
+	},
+	"show_all": "Mostrar todo",
 	"for_sale": "Para vender",
 	"to_buy": "Para comprar",
 	"Home": "Inicio",
