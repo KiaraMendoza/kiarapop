@@ -105,9 +105,9 @@ POST /apiv2/ads body: { name: 'Ad name', price: 999, sale: true, tags: ["example
   },
 }
 
-The thumbnail will automatically be generating right after you post the new ad, it will just take some little time to appear on the ads' page.
-
 ```
+
+The thumbnail will automatically be generating right after you post the new ad, it will just take some little time to appear on the ads' page.
 
 ### Update one ad by id
 
