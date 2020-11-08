@@ -6,10 +6,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const loginController = require('./routes/loginController');
-
-// const sessionConfigure = require('./lib/sessionConfigure');
-// const loginController = require('./routes/loginController');
-// const privadoController = require('./routes/privadoController');
 const jwtAuth = require('./lib/jwtAuth');
 
 const app = express();
@@ -37,6 +33,7 @@ app.use(i18n.init);
 
 // web routes
 app.use('/', require('./routes/index'));
+app.use('/change-locale', require('./routes/change-locale'));
 app.use('/ads', require('./routes/ads'));
 
 // api routes
@@ -50,6 +47,10 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  if (req.originalUrl.startsWith('/api/')) { // API request
+    res.json({ error: err.message });
+    return;
+  }
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

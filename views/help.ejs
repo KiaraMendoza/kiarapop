@@ -1,32 +1,33 @@
 <% include partials/head.ejs %>
-<div class="container">
+<% include partials/header.ejs %>
+<div class="container page-container">
     <h1><%= title %></h1>
-    <p><%= __('help_page_example_title') %></p>
+    <p><%= __('help_page.example.title') %></p>
     
-    <p> <i>http://localhost:3000/apivX/ads?name=adName</i></p>
-    <p><%= __('help_page_example_test') %></p>
+    <p> <i>http://localhost:3000/ads?name=adName</i></p>
+    <p><%= __('help_page.example.test') %></p>
     
     <b><%= __('filter_by') %> <%= __('name') %>:</b>
     <p>name=adName</p>
     <b><%= __('filter_by') %> <%= __('price') %>:</b>
-    <p>price=360. <%= __('basics_by') %> exact price.</p>
-    <p>price=360-. <%= __('basics_by') %> minimun.</p>
-    <p>price=-360. <%= __('basics_by') %> maximun.</p>
-    <p>price=360-400. <%= __('basics_by') %> price range.</p>
-    <b><%= __('filter_by') %> <%= __('sale') %> <%= __('basics_or') %> <%= __('buy') %>:</b>
-    <p>sale=true. <%= __('basics_for') %> <%= __('sale') %></p>
-    <p>sale=false. <%= __('basics_for') %> <%= __('buy') %>.</p>
-    <b><%= __('help_page_example_sort&limit') %></b>
+    <p>price=360. <%= __('basics.by') %> exact price.</p>
+    <p>price=360-. <%= __('basics.by') %> minimun.</p>
+    <p>price=-360. <%= __('basics.by') %> maximun.</p>
+    <p>price=360-400. <%= __('basics.by') %> price range.</p>
+    <b><%= __('filter_by') %> <%= __('sale') %> <%= __('basics.or') %> <%= __('buy') %>:</b>
+    <p>sale=true. <%= __('basics.for') %> <%= __('sale') %></p>
+    <p>sale=false. <%= __('basics.for') %> <%= __('buy') %>.</p>
+    <b><%= __('help_page.example.sort&limit') %></b>
     <p>skip=20&limit=10</p>
     <b><%= __('sort_by') %> <%= __('name') %>:</b>
     <p>sort=name</p>
-    <b><%= __('help_page_example_exclude') %></b>
+    <b><%= __('help_page.example.exclude') %></b>
     <p>fields=name%20-_id</p>
     <b><%= __('filter_by') %> <%= __('tags') %>:</b>
     <p>tags=lifestyle work</p>
     
-    <b><%= __('help_page_example_mixed') %></b>
+    <b><%= __('help_page.example.mixed') %></b>
     <a
-        href="/api<% process.env.API_VERSION %>/ads?tags=mobile&sale=false&name=samsung&price=50-&skip=0&limit=2&sort=price">http://localhost:3000/apivX/ads?tags=mobile&sale=false&name=samsung&price=50-&skip=0&limit=2&sort=price</a>
+        href="/ads?tags=mobile&sale=false&name=samsung&price=50-&skip=0&limit=2&sort=price">http://localhost:3000/ads?tags=mobile&sale=false&name=samsung&price=50-&skip=0&limit=2&sort=price</a>
 </div>
-<% include partials/footer.ejs %>
+<% include partials/footerHelp.ejs %>

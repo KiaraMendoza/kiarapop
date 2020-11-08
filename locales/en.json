@@ -3,9 +3,16 @@
 	"not_found": "Not Found",
 	"not_valid": "Not valid",
 	"generic": "There was an error: {{err}}",
-	"basics_or": "or",
-	"basics_for": "for",
-    "basics_by": "by",
+	"basics": {
+		"or": "or",
+		"for": "for",
+		"by": "by"
+	},
+	"for_sale": "For sale",
+	"to_buy": "To buy",
+	"Home": "Home",
+	"Ads": "Ads",
+	"Help": "Help",
 	"ads": "ads",
 	"name": "name",
 	"sale": "sale",
@@ -18,14 +25,20 @@
 	"go_home": "Go back to home",
 	"filter_by": "Filter by",
 	"sort_by": "Sort by",
-	"footer_help": "If you want to know more about filters, go check <a href='{{help_page_link}}'>filters</a> page",
-	"help_page_link": "http://localhost:3000/help",
-	"help_page_example_url": "Example of filter url:",
-	"help_page_example_title": "Here you have a list of possible filters:",
-	"help_page_example_test": "Where name is the filter type name and adName is the value of the filter",
-	"help_page_example_sort&limit": "Filters to skip a number of ads and/or change the maximun ads you get:",
-	"help_page_example_mixed": "Example of mixed filter:",
-	"help_page_example_exclude": "Get only ads' name, exclude id:",
-	"for": "for",
-	"or": "or"
+	"footer_help": "If you want to know more about filters, go to the",
+	"footer_help_filters": "filters page",
+	"help_page": {
+		"example": {
+			"url": "Example of filter url:",
+			"title": "Here you have a list of possible filters:",
+			"test": "Where name is the filter type name and adName is the value of the filter",
+			"sort&limit": "Filters to skip a number of ads and/or change the maximun ads you get:",
+			"mixed": "Example of mixed filter:",
+			"exclude": "Get only ads' name, exclude id:"
+		}
+	},
+	"ads_page": {
+		"subtitle": "You are now seeing the ads filtered!",
+		"list_tags": "List of Tags:"
+	}
 }

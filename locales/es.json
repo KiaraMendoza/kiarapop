@@ -3,9 +3,16 @@
 	"not_found": "No encontrado",
 	"not_valid": "No válido",
 	"generic": "Hubo un error: {{err}}",
-	"basics_or": "o",
-	"basics_for": "para",
-    "basics_by": "por",
+	"basics": {
+		"or": "o",
+		"for": "para",
+		"by": "por"
+	},
+	"for_sale": "Para vender",
+	"to_buy": "Para comprar",
+	"Home": "Inicio",
+	"Ads": "Anuncios",
+	"Help": "Ayuda",
 	"ads": "anuncios",
 	"name": "nombre",
 	"sale": "venta",
@@ -18,14 +25,20 @@
 	"go_home": "Volver al inicio",
 	"filter_by": "Filtro por",
 	"sort_by": "Ordenar por",
-	"footer_help": "Si quieres saber más sobre los filtros, échale un vistazo a la página de <a href='{{help_page_link}}'>filtros</a>",
-	"help_page_link": "http://localhost:3000/ayuda",
-	"help_page_example_url": "Ejemplo de una url con filtro",
-	"help_page_example_title": "Aquí encontrarás una lista de los posibles filtros",
-	"help_page_example_test": "Donde 'name' es un tipo de filtro y 'adName' es el nombre del anuncio",
-	"help_page_example_sort&limit": "Filtro para saltar un número determinado de anuncios o para cambiar el límite que se recojen:",
-	"help_page_example_mixed": "Ejemplo de un filtro mixto:",
-	"help_page_example_exclude": "Recoger solo los nombres de los artículos, excluyendo los ids.",
-	"for": "for",
-	"or": "or"
+	"footer_help": "Si quieres saber más sobre los filtros, ve a la",
+	"footer_help_filters": "página de filtros",
+	"help_page": {
+		"example": {
+			"url": "Ejemplo de una url con filtro",
+			"title": "Aquí encontrarás una lista de los posibles filtros",
+			"test": "Donde 'name' es un tipo de filtro y 'adName' es el nombre del anuncio",
+			"sort&limit": "Filtro para saltar un número determinado de anuncios o para cambiar el límite que se recojen:",
+			"mixed": "Ejemplo de un filtro mixto:",
+			"exclude": "Recoger solo los nombres de los artículos, excluyendo los ids."
+		}
+	},
+	"ads_page": {
+		"subtitle": "¡Ahora estás viendo las etiquetas filtradas!",
+		"list_tags": "Lista de etiquetas"
+	}
 }

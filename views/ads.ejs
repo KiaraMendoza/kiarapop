@@ -1,10 +1,11 @@
 <% include partials/head.ejs %>
+<% include partials/header.ejs %>
 
-<div class="container main-page">
+<div class="container page-container main-page">
     <div class="text-center pb-5">
         <h1><%= title %></h1>
-        <p>You are now seeing the ads filtered!</p>
-        <p>List of Tags:</p>
+        <p><%= __('ads_page.subtitle') %></p>
+        <p><%= __('ads_page.list_tags') %></p>
         <ul class="list-group flex-row justify-content-center pb-2">
             <li class="list-group-item"><a href="/ads">Show all</a></li>
             <li class="list-group-item"><a href="/ads?tags=work">Work</a></li>
@@ -20,7 +21,11 @@
                 <img src=<%= ad.image || "https://placedog.net/560" %> class="card-img-top" alt="<%= ad.name %>">
                 <div class="card-body">
                     <p class="card-text text-center card-title"><%= ad.name %>.</p>
-                    <p class="card-text d-flex justify-content-between card-price font-weight-bold"><%= ad.price %> €. <i><%= ad.sale === true ? 'For sale' : 'To buy' %>.</i></p>
+                    <p class="card-text d-flex justify-content-between card-price font-weight-bold"><%= ad.price %> €. 
+                        <i>
+                            <%= ad.sale === true ? __('for_sale') : __('to_buy') %>.
+                        </i>
+                    </p>
                     <p>Tags: <%= ad.tags %>.</p>
                 </div>
             </div>

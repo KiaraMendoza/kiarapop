@@ -2,13 +2,15 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.container {
+.page-container {
+  margin-top: 80px;
   padding: 50px;
   min-height: 83.5vh;
 }
 
-a {
-  color: #00B7FF;
+a, a:hover {
+  color:#343a40;
+  text-decoration: none;
 }
 
 .main-page .col {
@@ -29,6 +31,16 @@ a {
 .list-group-item {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
+  transition: all .5s;
+}
+
+.list-group-item:hover {
+  color: #fff;
+  background-color: #343a40;
+}
+
+.list-group-item:hover a {
+  color: #fff;
 }
 
 .list-group-item+.list-group-item {
@@ -47,4 +59,14 @@ footer p {
 footer a, footer a:hover {
   color: #fff;
   text-decoration: underline;
+}
+
+.lang-link {
+  color: #fff;
+  transition: color .5s;
+}
+
+.lang-link:hover {
+  color: #fff;
+  opacity: .8;
 }
