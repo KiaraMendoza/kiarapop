@@ -49,24 +49,40 @@ router.get('/', async function (req, res, next) {
             filter.name = new RegExp('^' + name, 'i');
         }
 
-        if (price) {
-            const priceGroups = price.match(/(\d+)/gm); // This will give an array like: [210, 300] or just a number if we only send '300' for example.
-            console.log("price --->" + price)
-            console.log("priceGroups --->" + priceGroups[0], priceGroups[1]);
-            if ((/-/gm).test(price)) { // If we detect a separator on the price, it will be filtered using the lte and/or gte
-                if ((/\d+-/gm).test(price)) { // We always have number- as the first element so there isn't a problem with it.
-                    let minPrice = priceGroups[0];
-                    filter.price = { $gte: minPrice };
+        // if (price) {
+        //     const priceGroups = price.match(/(\d+)/gm); // This will give an array like: [210, 300] or just a number if we only send '300' for example.
+        //     console.log("price --->" + price)
+        //     console.log("priceGroups --->" + priceGroups[0], priceGroups[1]);
+        //     if ((/-/gm).test(price)) { // If we detect a separator on the price, it will be filtered using the lte and/or gte
+        //         if ((/\d+-/gm).test(price)) { // We always have number- as the first element so there isn't a problem with it.
+        //             let minPrice = priceGroups[0];
+        //             filter.price = { $gte: minPrice };
+        //         }
+        //         if ((/-\d+/gm).test(price) && (/(\d+)-(\d+)/gm).test(price)) { // If we see a -number it can be alone or not, so let's test it.
+        //             let maxPrice = priceGroups[1]; // If there is more than one group, less than should be the second.
+        //             filter.price = { $lte: maxPrice };
+        //         } else if ((/-\d+/gm).test(price)) { // If it's alone, we're only filtering by less than, and less than is the first element.
+        //             let maxPrice = priceGroups[0];
+        //             filter.price = { $lte: maxPrice };
+        //         }
+        //     } else if ((/\d+/gm).test(price)) { // otherwise, it will be set just like given, and we will only get the exact match/es.
+        //         filter.price = price;
+        //     }
+        // }
+
+        if (price && price !== '-') {
+            if (price.indexOf('-') !== -1) {
+                filter.price = {}
+                let range = price.split('-')
+                if (range[0] !== '') {
+                    filter.price.$gte = range[0]
                 }
-                if ((/-\d+/gm).test(price) && (/(\d+)-(\d+)/gm).test(price)) { // If we see a -number it can be alone or not, so let's test it.
-                    let maxPrice = priceGroups[1]; // If there is more than one group, less than should be the second.
-                    filter.price = { $lte: maxPrice };
-                } else if ((/-\d+/gm).test(price)) { // If it's alone, we're only filtering by less than, and less than is the first element.
-                    let maxPrice = priceGroups[0];
-                    filter.price = { $lte: maxPrice };
+
+                if (range[1] !== '') {
+                    filter.price.$lte = range[1]
                 }
-            } else if ((/\d+/gm).test(price)) { // otherwise, it will be set just like given, and we will only get the exact match/es.
-                filter.price = price;
+            } else {
+                filter.price = price
             }
         }
 
@@ -114,7 +130,11 @@ router.post('/', upload.any(), async (req, res, next) => {
     try {
         // get the data from the request body
         const adData = req.body;
-        const adObject = { ...adData, image: req.files[0].filename};
+        let adObject = { ...adData };
+        
+        if (req.files && req.files[0]) {
+            adObject = { ...adData, image: req.files[0].filename };
+        }
 
         // check if given tag is available
         if (Array.isArray(adData.tags) && adData.tags.length > 0) {
@@ -130,9 +150,11 @@ router.post('/', upload.any(), async (req, res, next) => {
         console.log(ad);
 
         // create a thumbnail of the image on a queue
-        const imagePath = req.files[0].destination + req.files[0].filename;
-        const imageFileName = req.files[0].filename;
-        ad.enqueueThumbnailsCreation(imagePath, imageFileName, "./public/thumbnails/", ad._id);
+        if (req.files && req.files[0]) {
+            const imagePath = req.files[0].destination + req.files[0].filename;
+            const imageFileName = req.files[0].filename;
+            ad.enqueueThumbnailsCreation(imagePath, imageFileName, "./public/thumbnails/", ad._id);
+        }
 
         // finally save it on database
         const adSaved = await ad.save();
